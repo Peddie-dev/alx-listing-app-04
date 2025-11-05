@@ -1,13 +1,15 @@
 // constants/index.ts
 
 // Hero background image for homepage
-export const HERO_BG = "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80";
+export const HERO_BG =
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1950&q=80";
 
 // Sample property listings for homepage
 import { PropertyProps } from "@/interfaces";
 
 export const PROPERTYLISTINGSAMPLE: PropertyProps[] = [
   {
+    id: 1,
     name: "Villa Ocean Breeze",
     address: { state: "Seminyak", city: "Bali", country: "Indonesia" },
     rating: 4.89,
@@ -18,6 +20,7 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps[] = [
     discount: ""
   },
   {
+    id: 2,
     name: "Mountain Escape Chalet",
     address: { state: "Aspen", city: "Colorado", country: "USA" },
     rating: 4.7,
@@ -28,6 +31,7 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps[] = [
     discount: "30"
   },
   {
+    id: 3,
     name: "Cozy Desert Retreat",
     address: { state: "Palm Springs", city: "California", country: "USA" },
     rating: 4.92,

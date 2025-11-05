@@ -1,5 +1,4 @@
 // interfaces/index.ts
-
 export interface AddressProps {
   state: string;
   city: string;
@@ -13,6 +12,7 @@ export interface OffersProps {
 }
 
 export interface PropertyProps {
+  id: number; // ✅ Added for key usage
   name: string;
   address: AddressProps;
   rating: number;
