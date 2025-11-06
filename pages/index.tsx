@@ -1,10 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import PropertyCard from "@/components/ui/PropertyCard"; // Assume this component exists
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import PropertyCard from "@/components/ui/PropertyCard";
+import Pill from "@/components/ui/Pill"; 
+import { HERO_BG } from "@/constants";
 
 export default function Home() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const filters = ["Apartments", "Villas", "Offices", "Resorts"]; // Example filters
+  const HERO_BG =
+    "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80"; // Fallback hero background
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -22,14 +30,60 @@ export default function Home() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p className="text-center mt-10">Loading...</p>;
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {properties.map((property) => (
-        <PropertyCard key={property.id} property={property} />
-      ))}
-    </div>
+    <>
+     
+
+      {/* Hero Section */}
+      <section
+        className="h-[500px] flex flex-col justify-center items-center text-center text-white bg-cover bg-center relative"
+        style={{ backgroundImage: `url(${HERO_BG})` }}
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative z-10 px-4">
+          <h1 className="text-4xl font-bold mb-4">
+            Find your favorite place here!
+          </h1>
+          <p className="text-lg max-w-xl">
+            The best prices for over 2 million properties worldwide.
+          </p>
+        </div>
+      </section>
+
+      {/* Filter Section */}
+      <section className="my-8 max-w-7xl mx-auto px-4 flex flex-wrap gap-3 justify-center">
+        {filters.map((filter, index) => (
+          <button
+            key={index}
+            onClick={() =>
+              setSelectedFilter(selectedFilter === filter ? "" : filter)
+            }
+            className={`px-4 py-2 rounded-full border transition ${
+              selectedFilter === filter
+                ? "bg-green-600 text-white border-green-600"
+                : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+            }`}
+          >
+            {filter}
+          </button>
+        ))}
+      </section>
+
+      {/* Property Listing */}
+      <main className="max-w-7xl mx-auto px-4 pb-10 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
+        {properties
+          .filter((property) =>
+            selectedFilter ? property.type === selectedFilter : true
+          )
+          .map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
+      </main>
+
+     
+    </>
   );
 }
